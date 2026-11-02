@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nicolasst10511925.github.io/jos-bakery/sitemap.xml

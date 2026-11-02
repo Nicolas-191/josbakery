@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquiries & Instant Quote - Jo's Bakery</title>
+    <meta name="description" content="Get instant quote for cakes, bread, catering. Check cost and availability at Jo's Bakery Pretoria.">
+    <link rel="stylesheet" href="css_assets/style.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.jpeg" alt="Jo's Bakery Logo" width="150">
+        <nav><ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="enquiries.html">Enquiries</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul></nav>
+    </header>
+    <main>
+        <h2>Make an Enquiry - Get Instant Cost</h2>
+        <form id="enquiryForm">
+            <label for="name">Name:</label><input type="text" id="name" required>
+            <label for="email">Email:</label><input type="email" id="email" required>
+            <label for="productType">Product Type:</label>
+            <select id="productType" required>
+                <option value="">-- Select Product --</option>
+                <option value="Custom Birthday Cake">Custom Birthday Cake - R450</option>
+                <option value="Wedding Cake 3-Tier">Wedding Cake 3-Tier - R1500</option>
+                <option value="Daily Fresh Bread Loaf">Daily Fresh Bread Loaf - R35</option>
+                <option value="Croissant Box (6)">Croissant Box (6) - R120</option>
+                <option value="Event Catering Sweet Table">Event Catering - R850</option>
+                <option value="Delivery Service">Delivery Service - R50</option>
+            </select>
+            <label for="quantity">Quantity:</label><input type="number" id="quantity" min="1" value="1">
+            <label for="estimatedCost">Base Price:</label><input type="text" id="estimatedCost" readonly>
+            <div><input type="checkbox" id="needDelivery" style="width:auto;"><label for="needDelivery" style="display:inline;">Need Delivery? (+R50)</label></div>
+            <p id="totalCost"></p><p id="availabilityCheck"></p>
+            <label for="message">Enquiry Details:</label><textarea id="message" rows="4" required></textarea>
+            <p id="formErrors" style="color:red; font-weight:bold;"></p>
+            <button type="submit">Submit Enquiry</button>
+        </form>
+    </main>
+    <footer><p>&copy; 2025 Jo's Bakery. All Rights Reserved.</p></footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

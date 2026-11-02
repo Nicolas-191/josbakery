@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jo's Bakery | Fresh Bread & Custom Cakes in Pretoria - 123 Main Street</title>
+    <meta name="description" content="Jo's Bakery in Pretoria - Fresh bread baked daily at 4am, custom birthday & wedding cakes, catering & fast delivery from 123 Main Street, Pretoria. Order online!">
+    <meta name="keywords" content="bakery pretoria, fresh bread, custom cakes, birthday cakes pretoria, Jo's Bakery 123 Main Street">
+    <meta name="author" content="Jo's Bakery">
+    <link rel="stylesheet" href="css_assets/style.css">
+</head>
+</head>
+<body>
+    <header>
+        <img src="images/logo.jpeg" alt="Jo's Bakery Logo" width="150">
+        <nav><ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="enquiries.html">Enquiries</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul></nav>
+    </header>
+    <main>
+         <h1>WELCOME TO JO'S BAKERY</h1>
+        <section>
+            <h2>Freshly Baked Happiness Every Day</h2>
+            <p>At Jo's Bakery, we believe every day should start with the smell of fresh bread. Baked daily from 4am with locally sourced ingredients and family recipes.</p>
+        </section>
+        <section><h2>WHO WE ARE</h2><p>Jo's Bakery is a family-owned bakery based in Pretoria. Founded in 2020 by Jo Nkosi, what started as a small kitchen baking for neighbours during lockdown has grown into a trusted local bakery.</p></section>
+        <section>
+            <h2>WHY CHOOSE US</h2>
+            <ul id="featuresList" style="list-style:none; max-width:600px; margin:auto;"></ul>
+        </section>
+    </main>
+    <footer><p>&copy; 2025 Jo's Bakery. All Rights Reserved.</p></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const features = ["100% Fresh daily - baked at 4am every morning","Family recipes passed down for 3 generations","Custom orders for birthdays, weddings, and events","Locally sourced ingredients - supporting Pretoria farmers"];
+  document.getElementById('featuresList').innerHTML = features.map(f => `<li style="margin:10px 0;">✅ ${f}</li>`).join('');
+});
+</script>
+</body>
+</html>

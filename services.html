@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Jo's Bakery Pretoria - Fresh Cakes & Bread">
+  <meta property="og:description" content="Order custom cakes, fresh bread, catering in Pretoria">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://josbakery.co.za">
+  <title>Our Products | Jo's Bakery Services - Cakes, Bread, Catering Pretoria</title>
+  <meta name="description" content="Order custom cakes, daily fresh bread, event catering and delivery from Jo's Bakery Pretoria. Add to cart and pay securely online.">
+  <link rel="stylesheet" href="css_assets/style.css">
+  <style>
+    #dynamicProducts{display:grid!important;grid-template-columns:repeat(2,1fr)!important;align-items:stretch!important;gap:20px;}
+    @media(max-width:600px){#dynamicProducts{grid-template-columns:1fr!important}}
+    #cartModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;justify-content:center;align-items:center}
+    #cartBox{background:white;width:90%;max-width:400px;padding:20px;border-radius:15px}
+    #lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:10000;justify-content:center;align-items:center;flex-direction:column;}
+    #lightbox img{max-width:90%;max-height:80%;border-radius:10px}
+    .accordion{max-width:800px;margin:30px auto}
+    .acc-item{border:1px solid #ddd;margin-bottom:5px;border-radius:8px}
+    .acc-header{padding:12px;cursor:pointer;background:#f5f5f5;font-weight:bold}
+    .acc-body{display:none;padding:12px;background:white}
+  </style>
+</head>
+<body>
+<header>
+    <img src="_images/JOSBAKERY (1) .jpeg" alt="Jo's Bakery Logo Pretoria - Fresh Bread and Cakes" width="150">
+    <nav><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="enquiries.html">Enquiries</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+</header>
+<main>
+<h1>Our Bakery Services in Pretoria</h1>
+<h2>Fresh Products Daily</h2>
+<p style="text-align:center;">Cart: <span id="cartCount">0</span> items - <span id="cartTotal">R0</span></p>
+<input type="text" id="searchBar" placeholder="Search: cake, bread, pastry..." style="width:100%;max-width:400px;margin:1rem auto;display:block;padding:12px;border:2px solid #8d6e63;border-radius:25px;">
+<div id="dynamicProducts"></div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="accordion">
+  <div class="acc-item">
+    <div class="acc-header" onclick="toggleAcc(this)" style="padding:12px; background:#4E342E; color:white; cursor:pointer; margin-top:5px;">Do you deliver around Pretoria? +</div>
+    <div class="acc-body"><p>Yes! We deliver within 15km of Pretoria CBD. Free delivery over R500.</p></div>
+  </div>
+  <div class="acc-item">
+    <div class="acc-header" onclick="toggleAcc(this)" style="padding:12px; background:#4E342E; color:white; cursor:pointer; margin-top:5px;">How early should I order?</div>
+    <div class="acc-body"><p>Please order custom cakes at least 2 days in advance.</p></div>
+  </div>
+  <div class="acc-item">
+    <div class="acc-header" onclick="toggleAcc(this)" style="padding:12px; background:#4E342E; color:white; cursor:pointer; margin-top:5px;">What time is bakery open?</div>
+    <div class="acc-body"><p>Mon-Sat 6am-6pm, Sun 7am-2pm.</p></div>
+  </div>
+</div>
+</main>
+
+<div id="cartModal"><div id="cartBox"><h3>🛒 Added to Cart!</h3><div id="cartItems"></div><p><strong>Total: <span id="modalTotal">R0</span></strong></p><button onclick="goToCheckout()" style="background:#4a2c2a;color:white;border:none;padding:12px;border-radius:8px;width:100%;font-weight:bold;cursor:pointer;">CHECKOUT → Pay with Card 💳</button><button onclick="continueShopping()" style="background:#eee;border:none;padding:10px;border-radius:8px;width:100%;margin-top:8px;cursor:pointer;">Continue Shopping</button></div></div>
+
+<div id="lightbox" onclick="closeLightbox()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;justify-content:center;align-items:center;flex-direction:column;cursor:zoom-out;">
+  <img id="lightboxImg" src="" alt="Jo's Bakery enlarged" style="max-width:90%;max-height:80%;border-radius:15px;">
+  <p style="color:white;margin-top:15px;">Click anywhere to close</p>
+</div>
+
+<footer style="text-align:center; padding:20px; background:#4E342E; color:white; margin-top:30px;">
+<p>Follow Jo's Bakery Pretoria</p>
+<a href="https://www.instagram.com/" style="color:white;">Instagram</a> |
+<a href="https://www.facebook.com/" style="color:white;">Facebook</a> |
+<a href="https://wa.me/2700000000" style="color:white;">WhatsApp Orders</a>
+<p>&copy; 2025 Jo's Bakery. All Rights Reserved. Best Bakery in Pretoria - Fresh Daily</p>
+</footer>
+
+<script>
+let cart=JSON.parse(localStorage.getItem('joCart')||'[]');
+function updateCartDisplay(){document.getElementById('cartCount').textContent=cart.length;let t=cart.reduce((s,i)=>s+i.price,0);document.getElementById('cartTotal').textContent='R'+t;document.getElementById('modalTotal').textContent='R'+t;localStorage.setItem('joCart',JSON.stringify(cart));document.getElementById('cartItems').innerHTML=cart.map((it,i)=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:5px 0;"><span>${it.name}</span><span>R${it.price} <a onclick="removeItem(${i})" style="color:red;cursor:pointer;"> x</a></span></div>`).join('')}
+function addToCart(n,p){cart.push({name:n,price:p});updateCartDisplay();document.getElementById('cartModal').style.display='flex'}
+function removeItem(i){cart.splice(i,1);updateCartDisplay();if(cart.length===0)continueShopping()}
+function goToCheckout(){localStorage.setItem('joCart',JSON.stringify(cart));window.location.href='enquiries.html'}
+function continueShopping(){document.getElementById('cartModal').style.display='none'}
+function toggleAcc(el){let body=el.nextElementSibling;body.style.display=body.style.display==='block'?'none':'block'}
+function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').style.display='flex'}
+function closeLightbox(){document.getElementById('lightbox').style.display='none'}
+
+document.addEventListener('DOMContentLoaded',function(){
+  const products=[
+    {name:"Custom Birthday Cake",price:450,img:"_images/custom-cakes.jpg",desc:"Birthday, wedding and special cakes made to order. 2kg"},
+    {name:"Daily Fresh Bread",price:35,img:"_images/fresh-bread.jpg",desc:"Freshly baked every morning, soft and warm"},
+    {name:"Event Catering Sweet Table",price:850,img:"_images/catering.jpg",desc:"Sweet tables and catering for all your events - 50 items"},
+    {name:"Delivery Service",price:50,img:"_images/delivery.jpg",desc:"Fast scooter delivery straight to your door within 10km"}
+  ];
+  const container=document.getElementById('dynamicProducts');
+  function render(list){
+    container.innerHTML=list.map(p=>`
+      <div style="background:white;border-radius:12px;padding:15px;text-align:center;display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+        <div>
+          <img src="${p.img}" alt="${p.name}" onclick="openLightbox(this.src)" style="width:100%;height:220px;object-fit:cover;border-radius:8px;cursor:zoom-in;">
+          <h3 style="min-height:50px;">${p.name}</h3>
+          <p style="min-height:50px;">${p.desc}</p>
+          <p><strong>R${p.price}</strong></p>
+        </div>
+        <button onclick="addToCart('${p.name}',${p.price})" style="background:#4E342E;color:white;border:none;padding:12px;border-radius:8px;width:100%;margin-top:auto;">ADD TO CART</button>
+      </div>`).join('');
+  }
+  render(products);
+  updateCartDisplay();
+  document.getElementById('searchBar').addEventListener('input',e=>{
+    render(products.filter(p=>p.name.toLowerCase().includes(e.target.value.toLowerCase())));
+  });
+});
+</script>
+</body>
+</html>
